@@ -1,0 +1,27 @@
+Difference Between count(),count(*),count(1),count(0),count(-1),count(col),count('youtube')
+
+Answer : 
+All will give the same output if we are trying to get count. we can put any value inside the count it will be constant and it won't change. but if we want to count one particular column in table 
+we can use count(column name) which will excludes null. Also we can use distinct inside the count.
+
+online compiler:
+https://sqliteonline.com/
+
+Example :  
+
+Schema for table :
+-- create a table
+create table products ( product_id varchar(20), cost int);
+
+insert into products values ('P1', 200), ('P2', 300), ('P3', 300), ('P4', 500), ('P5', 800),('P6', NULL);
+
+select count(),
+count(*),
+count(1),
+count(-1),
+count(cost),
+count( distinct cost)
+from products;
+
+Output Values:
+6|6|6|6|5|4
