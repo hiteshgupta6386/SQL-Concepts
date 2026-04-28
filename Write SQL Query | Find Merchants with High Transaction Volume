@@ -1,0 +1,36 @@
+Write SQL Query 
+
+Problem
+Find Merchants with High Transaction Volume
+
+Description
+You are given a database table that stores transaction details for different merchants. Each record represents a single transaction made by a merchant.
+Your task is to identify all merchants who have performed more than a specified number of transactions (e.g., more than 10 transactions).
+
+Table Schema: MerchantTransactions
+
+| Column Name       | Data Type | Description                           |
+| ----------------- | --------- | ------------------------------------- |
+| MerchantID        | INT       | Unique identifier for the merchant    |
+| TransactionID     | INT       | Unique identifier for the transaction |
+| TransactionAmount | DECIMAL   | Amount of the transaction             |
+| TransactionDate   | DATE      | Date of the transaction               |
+
+Sample Input
+
+| MerchantID | TransactionID | TransactionAmount | TransactionDate |
+| ---------- | ------------- | ----------------- | --------------- |
+| 1          | 1             | 100               | 2024-04-08      |
+| 1          | 2             | 50                | 2024-04-09      |
+| 2          | 3             | 100               | 2024-04-15      |
+
+
+Expected Output
+Return a list of MerchantID values where the number of transactions is greater than 10.
+
+SQL Solution
+
+SELECT MerchantID, COUNT(TransactionID) AS txn_count
+FROM MerchantTransactions
+GROUP BY MerchantID
+HAVING COUNT(TransactionID) > 10;
