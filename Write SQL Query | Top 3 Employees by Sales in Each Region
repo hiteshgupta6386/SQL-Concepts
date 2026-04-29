@@ -1,0 +1,59 @@
+Write an SQL query 
+
+Problem Statement:
+Find the top 3 employees in each region based on their total sales.
+
+Table Schema: Emp
+
+| Column Name       | Data Type | Description                           |
+| ----------------- | --------- | ------------------------------------- |
+| EmpName           | VARCHAR   | Name of the employee                  |
+| Region            | VARCHAR   | Region of the employee                |
+| Sales             | INT       | Sales amount for a transaction        |
+
+Sample Input
+
+| EmpName    | Region     | Sales     | 
+| ---------- | ---------- | --------- |
+| Hitesh     | East       | 100       |
+| Hitesh     | East       | 300       |
+| Ramesh     | West       | 100       |
+| Suresh     | East       | 200       |
+| Mahesh     | East       | 150       |
+| Rajesh     | East       | 250       |
+
+Write an SQL query to find the top 3 employees in each region based on their total sales.
+
+Each employee may have multiple transactions. You need to:
+
+1) Calculate the total sales per employee per region
+2) Rank employees within each region based on total sales (highest first)
+3) Return only the top 3 employees from each region
+
+Expected Output
+
+| EmpName    | Region     | total_sales     | 
+| ---------- | ---------- | --------------- |
+| Hitesh     | East       | 400             |
+| Rajesh     | East       | 250             |
+| Suresh     | East       | 200             |
+| Ramesh     | West       | 100             |
+
+Solution (Using Window Function)
+
+WITH emp_sales AS (
+    SELECT 
+        EmpName,
+        Region,
+        SUM(Sales) AS total_sales
+    FROM Emp
+    GROUP BY EmpName, Region
+),
+ranked AS (
+    SELECT *,
+           RANK() OVER (PARTITION BY Region ORDER BY total_sales DESC) AS rnk
+    FROM emp_sales
+)
+SELECT EmpName, Region, total_sales
+FROM ranked
+WHERE rnk <= 3;
