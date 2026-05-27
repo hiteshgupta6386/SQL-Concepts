@@ -1,0 +1,46 @@
+Write an SQL Query
+
+Problem Statement:
+Find duplicate records in an employee table based on employee name.
+
+Table Schema: Employee
+
+| Column Name       | Data Type | Description                           |
+| ----------------- | --------- | ------------------------------------- |
+| emp_id            | INT       | Unique employee ID                    |
+| emp_name          | VARCHAR   | Name of the employee                  |
+| department        | VARCHAR   | Department of employee                |
+| salary            | INT       | Salary of the employee                |
+
+Sample Input
+
+|emp_id	|emp_name	|department |	salary  |
+|-------|---------|----------|----------|
+| 1	    | Hitesh	| IT	     | 70000    |
+| 2	    | Ankit	  | HR	     | 50000    | 
+| 3	    | Rahul	  | IT	     | 70000    |
+| 4     |	Hitesh	| Finance	 | 75000    |
+| 5	    | Priya	  | Finance	 | 60000    |
+| 6	    | Ankit   | Admin    |	55000   |
+
+Write an SQL query to find duplicate employee names.
+
+You need to:
+1) Group records based on employee name
+2) Count how many times each employee name appears
+3) Return only those employee names whose count is greater than 1
+
+Expected Output
+
+|emp_name	| duplicate_count|
+|-------- | -------------- |
+| Hitesh	| 2              |
+| Ankit	  | 2              |
+
+
+Solution:
+
+SELECT emp_name, COUNT(*) AS duplicate_count
+FROM Employee
+GROUP BY emp_name
+HAVING COUNT(*) > 1;
