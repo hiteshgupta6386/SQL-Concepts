@@ -1,0 +1,62 @@
+Write an SQL Query
+
+Problem Statement:
+Find customers who have not placed any orders.
+
+Table Schema: Customers
+
+|Column Name	  | Data Type	|Description           |
+|-------------- |---------- |--------------------- | 
+| customer_id	  | INT	      | Unique customer ID   |
+| customer_name |	VARCHAR   |	Name of the customer |
+
+Table Schema: Orders
+
+|Column Name	  | Data Type	|Description                |
+|-------------- |---------- |-------------------------- | 
+| order_id	    | INT	      | Unique order ID           |
+| customer_id   |	INT       |	Customer who placed order |
+| amount        |	INT       |	Order amount              |
+
+Sample Input
+
+Customers Table
+
+|customer_id | customer_name |
+|----------- | ------------- |
+| 1	         | Rahul         |
+| 2	         | Amit          |
+| 3	         | Neha          |
+| 4	         | Simran        |
+
+
+Orders Table
+
+|order_id | customer_id	| amount |
+| ------- | ----------- | ------ |
+| 101	    | 1	          | 500    |
+| 102	    | 2	          | 700    |
+
+Write an SQL query to find customers who have not placed any orders.
+
+You need to:
+
+1) Join Customers and Orders tables
+2) Find customers whose records are not present in Orders table
+3) Return customer names having no orders
+
+Expected Output
+
+| customer_name |
+| ------------- |
+| Neha          |
+| Simran        |
+
+Solution Using LEFT JOIN
+
+SELECT 
+    C.customer_name
+FROM Customers C
+LEFT JOIN Orders O
+ON C.customer_id = O.customer_id
+WHERE O.customer_id IS NULL;
