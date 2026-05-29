@@ -1,0 +1,47 @@
+Write an SQL Query
+
+Problem Statement:
+Find employees who earn more salary than their manager.
+
+Table Schema: Employees
+
+| Column Name       | Data Type | Description                           |
+| ----------------- | --------- | ------------------------------------- |
+| emp_id            | INT       | Unique employee ID                    |
+| emp_name          | VARCHAR   | Name of the employee                  |
+| salary            | INT       | Salary of the employee                |
+| manager_id        | INT       | Manager ID of employee                |
+
+Sample Input
+
+|emp_id	|emp_name	|salary |	manager_id  |
+|-------|---------|----------|----------|
+| 1	    | Rahul	  | 50000	   | NULL     |
+| 2	    | Amit	  | 40000	   | 1        | 
+| 3	    | Neha	  | 60000	   | 1        |
+| 4     |	Simran  | 45000	   | 2        |
+
+Write an SQL query to find employees whose salary is greater than their manager’s salary.
+
+You need to:
+
+1) Join Employees table with itself
+2) Compare employee salary with manager salary
+2) Return employee names earning more than their managers
+
+Expected Output
+
+| emp_name      |
+| ------------- |
+| Neha          |
+
+
+Solution Using SELF JOIN
+
+
+SELECT 
+    E.emp_name
+FROM Employees E
+JOIN Employees M
+ON E.manager_id = M.emp_id
+WHERE E.salary > M.salary;
