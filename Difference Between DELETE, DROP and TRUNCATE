@@ -1,0 +1,36 @@
+Difference Between DELETE, DROP and TRUNCATE
+
+DELETE
+The SQL DELETE command is a DML (Data Manipulation Language) command that deletes existing records from the table in the database. 
+It can delete one or more rows from the table depending on the condition given with the WHERE clause. 
+Thus the deletion of data is controlled according to the user's needs and requirements. 
+The DELETE statement does not delete the table from the database. 
+It just deletes the records present inside it and maintains a transaction log of each deleted row.
+
+Syntax
+The SQL DELETE command works with the following syntax:
+
+DELETE FROM TableName WHERE condition;
+
+DROP
+The SQL DROP command is a DDL (Data Definition Language) command that deletes the defined table with all its 
+table data, associated indexes, constraints, triggers, and permission specifications. 
+The DROP command drops the existing table from the database. 
+It only requires the name of the table to be dropped.
+
+Syntax
+The SQL DROP command works with the following syntax:
+
+DROP TABLE table_name;
+
+TRUNCATE
+The SQL TRUNCATE command is a DDL (Data Definition Language) command that modifies the data in the database. 
+The TRUNCATE command helps us delete the complete records from an existing table in the database. 
+It resets the table without removing it from the database. 
+It does not use the WHERE clause like the DELETE command to apply the condition. 
+It requires the table name to delete the records. It has faster performance due to the absence of conditions checking.
+
+Syntax
+The SQL TRUNCATE command works with the following syntax:
+
+TRUNCATE TABLE table_name;
