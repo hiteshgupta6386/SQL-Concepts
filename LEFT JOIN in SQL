@@ -1,0 +1,57 @@
+LEFT JOIN in SQL
+
+LEFT JOIN (or LEFT OUTER JOIN) is used to retrieve all records from the left table and the matching records from the right table based on a common column.
+
+If there is no matching record in the right table, the result still includes the left table's row with NULL values for the right table's columns.
+
+Syntax
+
+SELECT column1, column2, ...
+FROM table1
+LEFT JOIN table2
+ON table1.common_column = table2.common_column;
+
+Example
+
+Employee Table
+
+| emp_id | emp_name | dept_id |
+| ------ | -------- | ------- |
+| 1      | Hitesh   | 101     |
+| 2      | Rahul    | 102     |
+| 3      | Amit     | 103     |
+| 4      | Neha     | 105     |
+
+Department Table
+
+| dept_id | dept_name |
+| ------- | --------- |
+| 101     | IT        |
+| 102     | HR        |
+| 103     | Finance   |
+| 104     | Sales     |
+
+Query
+
+SELECT
+    e.emp_id,
+    e.emp_name,
+    d.dept_name
+FROM Employee e
+LEFT JOIN Department d
+ON e.dept_id = d.dept_id;
+
+Output
+
+| emp_id | emp_name | dept_name |
+| ------ | -------- | --------- |
+| 1      | Hitesh   | IT        |
+| 2      | Rahul    | HR        |
+| 3      | Amit     | Finance   |
+| 4      | Neha     | NULL      |
+
+Explanation:
+  All records from the Employee table (left table) are returned.
+  Matching records from the Department table (right table) are included.
+  Since Neha (dept_id = 105) does not have a matching department, the dept_name is displayed as NULL.
+  Sales (dept_id = 104) is not returned because there is no matching employee in the left table.
