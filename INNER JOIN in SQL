@@ -1,0 +1,51 @@
+INNER JOIN in SQL
+
+INNER JOIN is used to retrieve only the matching records from two or more tables based on a common column.
+
+Syntax
+
+SELECT column1, column2, ...
+FROM table1
+INNER JOIN table2
+ON table1.common_column = table2.common_column;
+
+Example
+
+Employee Table
+
+| emp_id | emp_name | dept_id |
+| ------ | -------- | ------- |
+| 1      | Hitesh   | 101     |
+| 2      | Rahul    | 102     |
+| 3      | Amit     | 103     |
+| 4      | Neha     | 105     |
+
+Department Table
+
+| dept_id | dept_name |
+| ------- | --------- |
+| 101     | IT        |
+| 102     | HR        |
+| 103     | Finance   |
+| 104     | Sales     |
+
+Query:
+
+SELECT
+    e.emp_id,
+    e.emp_name,
+    d.dept_name
+FROM Employee e
+INNER JOIN Department d
+ON e.dept_id = d.dept_id;
+
+Output:
+
+| emp_id | emp_name | dept_name |
+| ------ | -------- | --------- |
+| 1      | Hitesh   | IT        |
+| 2      | Rahul    | HR        |
+| 3      | Amit     | Finance   |
+
+
+
