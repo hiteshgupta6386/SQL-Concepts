@@ -1,0 +1,78 @@
+CROSS JOIN in SQL
+
+CROSS JOIN is used to retrieve the Cartesian product of two tables, meaning every row from the first table is combined with every row from the second table.
+
+Unlike other joins, CROSS JOIN does not require a matching condition (ON clause).
+
+Syntax
+
+SELECT column1, column2, ...
+FROM table1
+CROSS JOIN table2;
+
+
+Example
+
+Employee Table
+
+| emp_id | emp_name |
+| ------ | -------- |
+| 1      | Hitesh   |
+| 2      | Rahul    |
+| 3      | Amit     |
+
+Department Table
+
+| dept_id | dept_name |
+| ------- | --------- |
+| 101     | IT        |
+| 102     | HR        |
+
+Query
+
+SELECT
+    e.emp_id,
+    e.emp_name,
+    d.dept_id,
+    d.dept_name
+FROM Employee e
+CROSS JOIN Department d;
+
+
+Output
+
+| emp_id | emp_name | dept_id | dept_name |
+| ------ | -------- | ------- | --------- |
+| 1      | Hitesh   | 101     | IT        |
+| 1      | Hitesh   | 102     | HR        |
+| 2      | Rahul    | 101     | IT        |
+| 2      | Rahul    | 102     | HR        |
+| 3      | Amit     | 101     | IT        |
+| 3      | Amit     | 102     | HR        |
+
+Explanation:
+
+- The Employee table has 3 rows.
+- The Department table has 2 rows.
+- The result contains 3 × 2 = 6 rows, where each employee is paired with every department.
+
+Formula
+Total Rows = Rows in Table1 × Rows in Table2
+
+
+For the above example:
+3 Employees × 2 Departments = 6 Records
+
+
+ Note:
+
+ - CROSS JOIN does not use an ON condition.
+ - It is commonly used to generate all possible combinations of records.
+ - Be cautious when joining large tables, as the result size can grow very quickly.
+
+ Use Cases
+
+- Generating all possible product-color combinations
+- Creating calendar/date combinations
+- Test data generation
+- Producing all possible permutations between two datasets
