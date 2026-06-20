@@ -1,0 +1,30 @@
+Retrieve Customers with Orders Above Average Order Value
+
+Problem Statement
+Find all customers who have placed at least one order whose total amount is greater than the average order value of all orders.
+
+Table: Orders
+
+| order_id | customer_id | total_amount |
+| -------- | ----------- | ------------ |
+| 1        | 101         | 200          |
+| 2        | 102         | 500          |
+| 3        | 101         | 800          |
+| 4        | 103         | 300          |
+| 5        | 104         | 700          |
+
+Expected Output
+
+| customer_id |
+| ----------- |
+| 102         |
+| 101         |
+| 104         |
+
+SQL Query:
+
+SELECT DISTINCT customer_id
+FROM Orders
+WHERE total_amount >
+      (SELECT AVG(total_amount)
+       FROM Orders);
