@@ -1,0 +1,51 @@
+Identify the Most Selling Product
+
+Problem Statement
+Find the product that has been sold the most based on the total quantity sold.
+
+Table: Sales
+
+| product_id | quantity |
+| ---------- | -------- |
+| 101        | 5        |
+| 102        | 10       |
+| 101        | 8        |
+| 103        | 3        |
+| 102        | 7        |
+
+Expected Output:
+| product_id | total_qty |
+| ---------- | --------- |
+| 102        | 17        |
+
+SQL Query:
+
+SELECT product_id,
+       SUM(quantity) AS total_qty
+FROM Sales
+GROUP BY product_id
+ORDER BY total_qty DESC
+LIMIT 1;
+
+
+====================================================================================================================================================================================
+Q2. Find Top 3 Most Selling Products
+
+SELECT product_id,
+       SUM(quantity) AS total_qty
+FROM Sales
+GROUP BY product_id
+ORDER BY total_qty DESC
+LIMIT 3;
+
+====================================================================================================================================================================================
+Q3. Find Least Selling Product
+
+SELECT product_id,
+       SUM(quantity) AS total_qty
+FROM Sales
+GROUP BY product_id
+ORDER BY total_qty ASC
+LIMIT 1;
+
+
