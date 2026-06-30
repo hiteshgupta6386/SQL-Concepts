@@ -1,0 +1,221 @@
+What is ACID?
+
+ACID is a set of 4 properties that ensure database transactions are reliable, accurate, and consistent.
+
+A → Atomicity
+C → Consistency
+I → Isolation
+D → Durability
+
+Transaction: A sequence of database operations that should be treated as a single unit of work.
+Example: Transfer ₹1000 from Account A to Account B.
+
+1. Atomicity (All or Nothing)
+
+Definition:
+Atomicity ensures that either all operations of a transaction are completed successfully or none of them are.
+
+If any operation fails before COMMIT, the entire transaction is rolled back.
+
+Key Points:
+-> Also called "All or Nothing" property.
+-> Transaction cannot be partially completed.
+-> If one step fails, every previous step is undone.
+-> Failed transactions restart, they do not resume.
+
+Example:
+
+Money Transfer:
+
+Read A
+A = A - 1000
+Write A
+
+Read B
+B = B + 1000
+Write B
+
+COMMIT
+
+Suppose failure occurs after writing A but before updating B.
+
+Result: ROLLBACK
+
+Database returns to original state.
+
+Real-Life Example: 
+
+ATM Withdrawal
+
+Steps:
+Insert card
+Enter PIN
+Select amount
+Confirm
+
+If power goes off before completion,
+
+Money should NOT be deducted.
+
+Entire transaction is cancelled.
+
+Atomicity = Either every operation succeeds or every operation is rolled back.
+
+2. Consistency
+
+Definition:
+Consistency ensures that a transaction moves the database from one valid state to another valid state.
+Database rules and constraints must always remain valid.
+
+Key Points:
+-> Total data remains correct.
+-> Constraints are never violated.
+-> Before transaction and after transaction, data should remain logically correct.
+
+Example
+
+Initial State
+
+A = ₹2000
+B = ₹3000
+
+Total = ₹5000
+
+Transfer ₹1000 from A to B.
+
+After transaction
+
+A = ₹1000
+B = ₹4000
+
+Total = ₹5000
+
+Total money remains unchanged.
+
+Database remains consistent.
+
+Incorrect Scenario:
+If
+
+A = ₹1000
+B = ₹3000
+
+Total becomes
+
+₹4000
+
+₹1000 disappeared.
+
+This is an inconsistent state.
+
+Transaction should be rolled back.
+
+Real-Life Example:
+
+ATM deducts ₹5000 from account but cash never comes out.
+
+This violates consistency.
+
+Bank rolls back or reverses the transaction.
+
+Consistency ensures database integrity before and after every transaction.
+
+3. Isolation
+
+Definition:
+Isolation ensures that multiple transactions running simultaneously do not interfere with each other.
+
+Each transaction behaves as if it is executing alone.
+
+Key Points:
+-> Supports concurrent execution.
+-> Prevents one transaction from seeing incomplete work of another.
+-> Helps avoid concurrency issues.
+
+Parallel Execution
+T1
+T2
+T1
+T2
+T1
+
+Transactions execute concurrently.
+
+Conceptually, DBMS ensures the result is equivalent to some serial execution.
+
+Example
+
+T1
+T1
+T1
+
+T2
+T2
+T2
+
+or
+
+T2
+T2
+T2
+
+T1
+T1
+T1
+
+This concept is called Serializability.
+
+Benefits
+
+Prevents:
+-> Dirty Reads
+-> Lost Updates
+-> Unrepeatable Reads
+-> Phantom Reads
+
+Isolation ensures concurrent transactions behave like serial transactions.
+
+4. Durability
+
+Definition:
+Once a transaction is COMMITTED, the changes become permanent.
+
+Even if power fails immediately after commit, data should not be lost.
+
+Key Points:
+-> Happens after COMMIT.
+-> Data is permanently stored.
+-> Survives system crash.
+-> Usually achieved using logs and disk storage.
+
+Example
+
+Before
+
+A = ₹2000
+B = ₹3000
+
+After Commit
+
+A = ₹1000
+B = ₹4000
+
+Even after restarting the database,
+
+Values remain
+
+A = ₹1000
+B = ₹4000
+
+Real-Life Example:
+
+Online payment shows:
+
+Payment Successful
+
+Even if phone battery dies immediately,
+
+Payment record still exists because it has been permanently committed.
+
+
+Durability guarantees committed data is never lost.
